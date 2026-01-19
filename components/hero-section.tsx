@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from "@/components/ui/button"
 
 export function HeroSection() {
@@ -14,7 +16,7 @@ export function HeroSection() {
         {/* Logo prominently displayed */}
         <div className="mb-10">
           <img 
-            src="/images/wqb3kwvo609rsugoe3ow.png" 
+            src="/images/logo.png" 
             alt="Royal Concierge" 
             className="h-36 md:h-48 w-auto mx-auto"
           />
@@ -34,6 +36,7 @@ export function HeroSection() {
         <Button 
           size="lg"
           className="bg-transparent border border-gold/60 text-gold hover:bg-gold/10 hover:border-gold hover:shadow-[0_0_30px_rgba(201,162,39,0.3)] tracking-[0.2em] text-xs uppercase px-10 py-6 transition-all duration-500"
+          onClick={() => document.getElementById('membership')?.scrollIntoView({ behavior: 'smooth' })}
         >
           Request Invitation
         </Button>

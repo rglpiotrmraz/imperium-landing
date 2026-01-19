@@ -15,7 +15,7 @@ export function Header() {
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
             <img 
-              src="/images/wqb3kwvo609rsugoe3ow.png" 
+              src="/images/logo.png" 
               alt="Royal Concierge" 
               className="h-10 w-auto"
             />
@@ -48,6 +48,7 @@ export function Header() {
             <Button 
               variant="outline" 
               className="border-gold/50 text-gold hover:bg-gold/10 hover:border-gold hover:shadow-[0_0_20px_rgba(201,162,39,0.2)] tracking-[0.15em] text-xs uppercase transition-all duration-500 bg-transparent"
+              onClick={() => document.getElementById('membership')?.scrollIntoView({ behavior: 'smooth' })}
             >
               Request Invitation
             </Button>
@@ -90,6 +91,10 @@ export function Header() {
             <Button 
               variant="outline" 
               className="w-fit border-gold/50 text-gold hover:bg-gold/10 hover:border-gold tracking-[0.15em] text-xs uppercase bg-transparent"
+              onClick={() => {
+                setIsMenuOpen(false)
+                document.getElementById('membership')?.scrollIntoView({ behavior: 'smooth' })
+              }}
             >
               Request Invitation
             </Button>

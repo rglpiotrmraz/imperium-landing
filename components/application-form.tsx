@@ -6,16 +6,37 @@ import { Button } from "@/components/ui/button"
 export function ApplicationForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setError(null)
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500))
-    
-    setIsSubmitting(false)
-    setSubmitted(true)
+    const formData = new FormData(e.currentTarget)
+    const data = {
+      name: formData.get('name') as string,
+      contact: formData.get('contact') as string,
+      requestDetails: formData.get('request') as string,
+    }
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to submit')
+      }
+
+      setSubmitted(true)
+    } catch {
+      setError('Something went wrong. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -113,6 +134,11 @@ export function ApplicationForm() {
                     className="w-full bg-transparent border-0 border-b border-gold/30 focus:border-gold text-foreground py-3 text-base tracking-wide placeholder:text-silver/30 focus:outline-none transition-colors resize-none"
                   />
                 </div>
+
+                {/* Error Message */}
+                {error && (
+                  <p className="text-red-400 text-sm text-center">{error}</p>
+                )}
 
                 {/* Submit Button */}
                 <div className="pt-4">
